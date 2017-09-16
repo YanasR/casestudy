@@ -1,5 +1,5 @@
 # casestudy
-Machine Learning Ta Feng data
+
 Download the code and run Casestudy.py --it produce 6 pyplots
 The program reads data to pandas dataframe plot total sales by date,total transactions by date, sales per week of the day
 it then fit a Ridge regression with amount of item sold on a day and number of transaction on a day as input feature
