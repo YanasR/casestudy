@@ -84,56 +84,10 @@ def plot_transperdayhist(Data):
     ax.bar(Data.index,Data['price'],width=0.6,color='b')
     ax.set_xticks(Data.index+0.20)
     ax.set_xticklabels(Data.trans_date_time)
-    
-    
+ 
     plt.show()
     
- 
-    
-'''   y_axis1 =Data.loc[Data['trans_date_time']=='Monday']['price'].tolist()
-    y_axis2 =Data.loc[Data['trans_date_time']=='Tuesday']['price'].tolist()
-    y_axis3 =Data.loc[Data['trans_date_time']=='Wednesday']['price'].tolist()
-    y_axis4 =Data.loc[Data['trans_date_time']=='Thrusday']['price'].tolist()
-    y_axis5 =Data.loc[Data['trans_date_time']=='Friday']['price'].tolist()
-    y_axis6 =Data.loc[Data['trans_date_time']=='Saturday']['price'].tolist()
-    y_axis7 =Data.loc[Data['trans_date_time']=='Sunday']['price'].tolist()
-    
-#    x_axis =['trans_date_time'].tolist()
-    
-    x_axis1 =Data.loc[Data['trans_date_time']=='Monday']['trans_date_time'].tolist()
-    x_axis2 =Data.loc[Data['trans_date_time']=='Tuesday']['trans_date_time'].tolist()
-    x_axis3 =Data.loc[Data['trans_date_time']=='Wednesday']['trans_date_time'].tolist()
-    x_axis4 =Data.loc[Data['trans_date_time']=='Thrusday']['trans_date_time'].tolist()
-    x_axis5 =Data.loc[Data['trans_date_time']=='Friday']['trans_date_time'].tolist()
-    x_axis6 =Data.loc[Data['trans_date_time']=='Saturday']['trans_date_time'].tolist()
-    x_axis7 =Data.loc[Data['trans_date_time']=='Sunday']['trans_date_time'].tolist() '''
-    
-    
-   
-    
- #   x_axis =Data[['trans_date_time','price']].groupby('trans_date_time')['price'].sum().index.tolist()
-    
-    
-    # Create the figure
-    
-    
-'''    indices = np.arange(len(x_axis1))
-    hist_monday = plt.bar(indices, y_axis1, bar_width,
-    alpha=opacity, color='b', label='Monday')
-    
-    indices = np.arange(len(x_axis2))
-    hist_tuesday = plt.bar(indices, y_axis2, bar_width,
-    alpha=opacity, color='b', label='Tuesday')
-    
-   
-    
-    plt.show()'''
- 
-
-
-   
- 
-    
+  
 
 if __name__ == '__main__':
     main()

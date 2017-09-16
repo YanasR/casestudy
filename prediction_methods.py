@@ -37,13 +37,7 @@ def predict_sales_on_trans(Data):
     
     X_train, X_test, y_train, y_test = train_test_split(x_axis, y_axis, random_state=0)
     
-   # scaler = MinMaxScaler()
-   # X_train = scaler.fit_transform(X_train)
-   # X_test = scaler.fit_transform(X_test) 
- 
-    
-
-    
+     
     Linreg = Ridge(alpha=.01).fit(X_train, y_train)
     
     print('R-squared score (training): {:.3f}'
@@ -65,6 +59,7 @@ def predict_sales_on_trans(Data):
     
     print (results.scores_)
     print (results.pvalues_)
+    plot_residual(data,Linreg)
     
     plot_results(data,Linreg)
     
@@ -82,18 +77,35 @@ def plot_results(data,Linreg):
     plt.title("Linear Regression")
     plt.legend()
     plt.show()
-    
    
     data = data[data[:,1].argsort()]
     fig = plt.figure()
     ax = fig.gca(projection='3d')
     ax.plot(data[:,0],data[:,1],Linreg.predict(data[:,[0,1]]),color='Red',label="Linear Regression")
     ax.scatter(data[:,0],data[:,1],data[:,2],c='blue',marker='o',label="Sales")
-   
+
     ax.legend()
 
     plt.show()
     
+def plot_residual(data,Linreg):
+    
+  
+   
+    data = data[data[:,0].argsort()]
+    
+    difference = data[:,2]-Linreg.predict(data[:,[0,1]])
+    
+    plt.scatter(data[:,0],difference,color='black',label="Sales")
+ #   plt.plot(data[:,0],y=0,color="blue",label="Linear Regression")
+    
+    plt.xlabel("Transactions")
+    plt.ylabel("Residualvalues")
+    plt.title("Residual plotting")
+    plt.legend()
+    plt.show()
+   
+    plt.close()
     
     
     
