@@ -23,13 +23,15 @@ def Create_item_list():
     
     frequent_itemsets = apriori(basket_sets, min_support=0.07, use_colnames=True)
     
+    print(frequent_itemsets)
+    
     rules = association_rules(frequent_itemsets, metric="lift", min_threshold=1)
     print(rules.head())
     
     
     #product_freq = Data[['product_id']].groupby('product_id').count()
     
-    print(Basket)
+    
     
     
     
