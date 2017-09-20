@@ -21,7 +21,7 @@ def Create_item_list():
     
     basket_sets = basket.applymap(encode_units)
     
-    frequent_itemsets = apriori(basket_sets, min_support=0.07, use_colnames=True)
+    frequent_itemsets = apriori(basket_sets, min_support=0.01, use_colnames=True)
     
     print(frequent_itemsets)
     
