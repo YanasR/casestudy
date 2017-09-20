@@ -45,17 +45,28 @@ def predicting_sinusoidal():
     x_axis1 =Data.index.tolist()
     
     y_axis =Data['price']
+    y_axis = np.array(y_axis)
+    
+    y_axis=remove_outliers(y_axis)
+    
         
-    x_axis1 = np.array(x_axis1)
+    x_axis1 = np.arange(1,len(y_axis)+1)
     
     x_axis2 = np.sin(2*math.pi*x_axis1/7)
     x_axis3 = np.cos(2*math.pi*x_axis1/7)
-    y_axis = np.array(y_axis)
+   
     x_axis = np.column_stack((x_axis1,x_axis2,x_axis3))
+    
+  #  y=np.array([2,2,2,2,5,20,2,2])
+   
+    
+  
     data = np.column_stack((x_axis,y_axis))
     
+   
+    
     X_train, X_test, y_train, y_test = train_test_split(x_axis, y_axis, random_state=0)
-    poly = PolynomialFeatures(degree=5)
+    poly = PolynomialFeatures(degree=3)
     X_F1_poly = poly.fit_transform(X_train)
     X_F2_poly = poly.fit_transform(X_test)
     Linreg = Ridge(alpha=.1).fit(X_F1_poly, y_train)
@@ -84,6 +95,12 @@ def predicting_sinusoidal():
     print (results.pvalues_)
     plot_results(data,Linreg,poly)
     
+    
+def remove_outliers(data, m = 2):
+    d = np.abs(data - np.median(data))
+    mdev = np.median(d)
+    s = d/(mdev if mdev else 1.)
+    return data[s<m]
      
     
 def plot_results(data,Linreg,poly):
@@ -93,12 +110,12 @@ def plot_results(data,Linreg,poly):
     plt.plot(data[:,0],data[:,3],color='black',label="Sales")
     
     X_F1_poly = poly.fit_transform(data[:,[0,1,2]])
-    plt.plot(data[:,0],Linreg.predict(X_F1_poly),color="blue",label="Linear Regression")
+    plt.plot(data[:,0],Linreg.predict(X_F1_poly),color="blue",label="Polynomial Regression")
   #  plt.plot(data[:,0],Linreg.predict(x_axis),color="blue",label="Linear Regression")
     
     plt.xlabel("Transactions")
     plt.ylabel("Sales")
-    plt.title("Linear Regression")
+    plt.title("Polynomial Regression")
     plt.legend()
     plt.show()
     
