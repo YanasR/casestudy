@@ -17,19 +17,20 @@ def Create_item_list():
     Data = pd.read_csv(csv_filename,sep=';')
     
     Data = Data.ix[0:1000,:]
+    
+    print (Data.ix[0])
     Data['key'] = Data['trans_date_time'].map(str) + Data['cust_id'].map(str)
     
     
     
     basket_prep = Data.groupby(['key','product_id'])['amount'].sum()
     
-    basket = basket_prep.unstack()
+    basket = basket_prep.unstack().reset_index().fillna(0).set_index('key')
     
-    basket = basket.fillna(0)
-    
+        
     basket_sets = basket.applymap(encode_units)
     
-    print(basket_sets.ix[0])
+    print(basket.ix[0])
        
     frequent_itemsets = apriori(basket_sets, min_support=0.07, use_colnames=True)
     
